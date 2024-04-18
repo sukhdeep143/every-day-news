@@ -80,19 +80,28 @@ export class News extends Component {
       loding: false
     }
   }
+
   async componentDidMount(){
-    let url = 'https://newsapi.org/v2/everything?q=tesla&from=2024-03-17&sortBy=publishedAt&apiKey=aaffe24e0f0d400dbd1ceb3c8e567412'
+    let url = 'https://newsapi.org/v2/everything?q=apple&from=2024-04-16&to=2024-04-16&sortBy=popularity&apiKey=aaffe24e0f0d400dbd1ceb3c8e567412'
     let data = await fetch(url);
-    let parsedData = await data.json()
+    let parsedData = await data.json();
     console.log(parsedData);
     this.setState({Articles: parsedData.articles    })
   }
   
-
+  nextButton = ()=>{
+    console.log("Nextbtn");
+  }
+  
+  prevButton= ()=>{
+    console.log("previous");
+  }
+  
+  
   render() {
     return (
       <div className='container my-3 '>
-        <h1>Whole world News </h1>
+        <h1 className='py-2'> Whole world News </h1>  
             <div className="row ">
               {this.state.Articles.map((element)=>{
                 return   <div className="col-md-4 mb-4" key={element.url}>
@@ -100,6 +109,10 @@ export class News extends Component {
                 </div>
               }) }
           
+        </div>
+        <div className="d-flex justify-content-between ">
+          <button type="button" onClick={this.prevbtn} className="btn btn-dark mr-2  ">&larr; Previous</button>
+          <button type="button" onClick={this.nextButton} className="btn btn-dark">Next &rarr;</button>
         </div>
       </div>
     )
