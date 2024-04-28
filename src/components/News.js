@@ -89,12 +89,28 @@ export class News extends Component {
     this.setState({Articles: parsedData.articles    })
   }
   
-  nextButton = ()=>{
+  nextButton = async()=>{
     console.log("Nextbtn");
+    let url = `https://newsapi.org/v2/everything?q=apple&from=2024-04-16&to=2024-04-16&sortBy=popularity&apiKey=aaffe24e0f0d400dbd1ceb3c8e567412&page=${this.state.page +1}`;
+    let data = await fetch(url);
+    let parsedData = await data.json();
+    console.log(parsedData);
+    this.setState({
+      page: this.setState +1,
+      Articles: parsedData.articles 
+    })
   }
   
-  prevButton= ()=>{
+  prevButton= async()=>{
     console.log("previous");
+    let url = `https://newsapi.org/v2/everything?q=apple&from=2024-04-16&to=2024-04-16&sortBy=popularity&apiKey=aaffe24e0f0d400dbd1ceb3c8e567412&page=${this.state.page - 1}`;
+    let data = await fetch(url);
+    let parsedData = await data.json();
+    console.log(parsedData);
+    this.setState({
+      page: this.setState - 1,
+      Articles: parsedData.articles 
+    })
   }
   
   
@@ -110,10 +126,10 @@ export class News extends Component {
               }) }
           
         </div>
-        <div className="d-flex justify-content-between ">
-          <button type="button" onClick={this.prevbtn} className="btn btn-dark mr-2  ">&larr; Previous</button>
+        {/* <div className="d-flex justify-content-between ">
+          <button type="button" onClick={this.prevButton} className="btn btn-dark mr-2  ">&larr; Previous</button>
           <button type="button" onClick={this.nextButton} className="btn btn-dark">Next &rarr;</button>
-        </div>
+        </div> */}
       </div>
     )
   }
